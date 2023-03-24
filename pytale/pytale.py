@@ -4,5 +4,3 @@ class Scenario:
         '''
         filepath: "path/to/xxxxx.json"
         '''
-    
-    

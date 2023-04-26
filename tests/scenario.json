@@ -1,0 +1,114 @@
+{
+    "setting": {
+        "player_name": "あ",
+        "fight_with_mao": "戦う"
+    },
+    "scenario": {
+        "entry": [
+            {
+                "speaker": "受付",
+                "text": "おはようございます。",
+                "sleep": 2
+            },
+            {
+                "speaker": "受付",
+                "text": "あなたの名前を教えてください。",
+                "sleep": 1
+            },
+            {
+                "speaker": "とおりすがり",
+                "text": "そうだそうだ！",
+                "sleep": 1
+            },
+            {
+                "type": "input",
+                "text": "名前を入力してください",
+                "var_name": "player_name"
+            },
+            {
+                "speaker": "受付",
+                "text": "{player_name}さんですね。かしこまりました。",
+                "sleep": 1
+            },
+            {
+                "speaker": "受付",
+                "text": "では次に、希望役職を教えてください",
+                "sleep": 1
+            },
+            {
+                "type": "select",
+                "text": "希望役職を入力してください",
+                "choices": [
+                    "戦士",
+                    "一般人"
+                ],
+                "var_name": "player_job"
+            },
+            {
+                "speaker": "受付",
+                "text": "受付が完了しました。"
+            },
+            {
+                "speaker": "受付",
+                "text": "では、{player_job}の{player_name}さん、いってらっしゃい！\n",
+                "sleep": 2
+            },
+            {
+                "type": "link",
+                "ref": "player_job",
+                "to": {
+                    "戦士": "mao",
+                    "一般人": "slime"
+                }
+            }
+        ],
+        "mao": [
+            {
+                "text": "魔王が現れた！",
+                "sleep": 1
+            },
+            {
+                "type": "select",
+                "text": "戦っちゃう？",
+                "choices": [
+                    "戦う",
+                    "やめとく"
+                ],
+                "var_name": "fight_with_mao"
+            },
+            {
+                "type": "link",
+                "ref": "fight_with_mao",
+                "to": {
+                    "戦う": "mao_sokusi",
+                    "やめとく": "mao_nige"
+                }
+            }
+        ],
+        "mao_sokusi": [
+            {
+                "text": "{player_name}は為す術なく倒れた",
+                "sleep": 2
+            }
+        ],
+        "mao_nige": [
+            {
+                "text": "{player_name}は全力で逃げた！！！",
+                "sleep": 2
+            },
+            {
+                "text": "あかんかった！",
+                "sleep": 1
+            },
+            {
+                "type": "link",
+                "to": "mao_sokusi"
+            }
+        ],
+        "slime": [
+            {
+                "text": "スライムが現れた！よわそう！"
+            }
+        ]
+    }
+}

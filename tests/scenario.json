@@ -1,8 +1,5 @@
 {
-    "setting": {
-        "player_name": "あ",
-        "fight_with_mao": "戦う"
-    },
+    "setting": {},
     "scenario": {
         "entry": [
             {

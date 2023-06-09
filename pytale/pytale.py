@@ -1,7 +1,6 @@
 import os
 import json
 import time
-import re
 from collections import OrderedDict
 
 
@@ -114,8 +113,6 @@ class Scenario:
 
         # 文章を表示
         if type(text) is str:
-            if re.search(r"{*.}", text):
-                text = self.replace_vars(text)
             print(text)
         else:
             raise TypeError("'text' must be str")
@@ -134,14 +131,15 @@ class Scenario:
             self.read(text)
 
         while True:
-            answer = input(":")
+            answer = input(": ")
             # 回答なしは無効
             if answer != "": break
 
+        print()
         return answer
     
 
-    def select(self, text, choices = None) -> str:
+    def select(self, text: str, choices = None) -> str:
         '''
         Parameters
         ----------
@@ -154,19 +152,32 @@ class Scenario:
             self.read(text)
 
         if choices is not None:
-            print(f"選択肢: {choices}")
+            print(f"choices: {choices}")
 
         while True:
-            answer = input(":")
+            answer = input(": ")
 
             # 回答が選択肢に含まれているかを確認
             if answer in choices:
                 break
             
             # else
-            print("もう一度入力してください")
+            print("try again.")
 
+        print()
         return answer
+    
+
+    def confirm(self, text: str, yes = "y", no = "n") -> bool:
+        '''
+        Parameters
+        ----------
+        text: str
+            回答待機時に表示するテキスト（省略可）\n
+        '''
+        answer = self.select(text, [yes, no])
+
+        return True if answer == yes else False
 
     
     def link(self, to: str | dict, ref = None) -> None:
@@ -238,6 +249,8 @@ class Scenario:
                 sleep = 0
 
             raise_missing_argument_error("read", missing_arguments)
+
+            text = self.replace_vars(text)
 
             self.read(text, sleep, speaker)
 

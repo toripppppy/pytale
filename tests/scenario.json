@@ -1,110 +1,51 @@
 {
-    "setting": {},
+    "setting": {
+        "player_name": "hoge",
+        "hero_flag": "y"
+    },
     "scenario": {
-        "entry": [
+        "intro": [
             {
-                "speaker": "受付",
-                "text": "おはようございます。",
-                "sleep": 2
-            },
-            {
-                "speaker": "受付",
-                "text": "あなたの名前を教えてください。",
-                "sleep": 1
-            },
-            {
-                "speaker": "とおりすがり",
-                "text": "そうだそうだ！",
-                "sleep": 1
+                "speaker": "King",
+                "text": "Hi.",
+                "sleep": 1.5
             },
             {
                 "type": "input",
-                "text": "名前を入力してください",
+                "text": "What's your name?",
                 "var_name": "player_name"
             },
             {
-                "speaker": "受付",
-                "text": "{player_name}さんですね。かしこまりました。",
-                "sleep": 1
-            },
-            {
-                "speaker": "受付",
-                "text": "では次に、希望役職を教えてください",
-                "sleep": 1
-            },
-            {
                 "type": "select",
-                "text": "希望役職を入力してください",
+                "text": "ok hoge, You wanna be a hero?",
                 "choices": [
-                    "戦士",
-                    "一般人"
+                    "y",
+                    "n"
                 ],
-                "var_name": "player_job"
-            },
-            {
-                "speaker": "受付",
-                "text": "受付が完了しました。"
-            },
-            {
-                "speaker": "受付",
-                "text": "では、{player_job}の{player_name}さん、いってらっしゃい！\n",
-                "sleep": 2
+                "var_name": "hero_flag"
             },
             {
                 "type": "link",
-                "ref": "player_job",
+                "ref": "hero_flag",
                 "to": {
-                    "戦士": "mao",
-                    "一般人": "slime"
+                    "y": "yes",
+                    "n": "no"
                 }
             }
         ],
-        "mao": [
+        "yes": [
             {
-                "text": "魔王が現れた！",
-                "sleep": 1
+                "speaker": "hoge",
+                "text": "Yes.",
+                "sleep": 1.5
             },
             {
-                "type": "select",
-                "text": "戦っちゃう？",
-                "choices": [
-                    "戦う",
-                    "やめとく"
-                ],
-                "var_name": "fight_with_mao"
-            },
-            {
-                "type": "link",
-                "ref": "fight_with_mao",
-                "to": {
-                    "戦う": "mao_sokusi",
-                    "やめとく": "mao_nige"
-                }
+                "text": "\n-GAME CLEAR-"
             }
         ],
-        "mao_sokusi": [
+        "no": [
             {
-                "text": "{player_name}は為す術なく倒れた",
-                "sleep": 2
-            }
-        ],
-        "mao_nige": [
-            {
-                "text": "{player_name}は全力で逃げた！！！",
-                "sleep": 2
-            },
-            {
-                "text": "あかんかった！",
-                "sleep": 1
-            },
-            {
-                "type": "link",
-                "to": "mao_sokusi"
-            }
-        ],
-        "slime": [
-            {
-                "text": "スライムが現れた！よわそう！"
+                "text": "\n-GAME OVER-"
             }
         ]
     }
